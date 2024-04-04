@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="monthBackground">#DAC7C7</color> <!-- Example color for month background -->
+    <color name="yearBackground">#3F65C1</color> <!-- Example color for year background -->
+    <color name="yearText">#A89B2B</color>
+</resources>

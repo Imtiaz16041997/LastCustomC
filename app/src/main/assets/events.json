@@ -1,0 +1,46 @@
+{
+  "Status": "OK",
+  "Message": null,
+  "Result": [
+    {
+      "eventId": 6,
+      "eventTopic": "Planand 2",
+      "eventDetails": "Pre Planand",
+      "eventStartDt": "2024-01-15T00:00:01",
+      "eventEndDt": "2024-01-25T08:12:01",
+      "eventTypeId": 1003,
+      "eventTypeNM": "User's personal event",
+      "eventTypeColor": "#32a8a4"
+    },
+    {
+      "eventId": 2,
+      "eventTopic": "Planand",
+      "eventDetails": "Pre Planand",
+      "eventStartDt": "2024-01-15T00:00:01",
+      "eventEndDt": "2024-01-25T08:12:01",
+      "eventTypeId": 1002,
+      "eventTypeNM": "Bank declared events",
+      "eventTypeColor": "#32a83c"
+    },
+    {
+      "eventId": 1,
+      "eventTopic": "Meeting",
+      "eventDetails": "Meeting with",
+      "eventStartDt": "2024-01-25T06:12:01",
+      "eventEndDt": "2024-01-25T08:12:01",
+      "eventTypeId": 1003,
+      "eventTypeNM": "User's personal event",
+      "eventTypeColor": "#32a8a4"
+    },
+    {
+      "eventId": 4,
+      "eventTopic": "Test",
+      "eventDetails": "Meeting with",
+      "eventStartDt": "2024-01-25T06:12:01",
+      "eventEndDt": "2024-01-25T08:12:01",
+      "eventTypeId": 1003,
+      "eventTypeNM": "User's personal event",
+      "eventTypeColor": "#32a8a4"
+    }
+  ]
+}
