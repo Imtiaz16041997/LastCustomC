@@ -2,8 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#51A4E6</color>  <!--Current date Color -->
+    <color name="date">#E6A9BE</color>  <!--Whole Date Color -->
 
     <color name="monthBackground">#DAC7C7</color> <!-- Example color for month background -->
+    <color name="friday">#EC1B1B</color> <!-- Example color for month background -->
     <color name="yearBackground">#3F65C1</color> <!-- Example color for year background -->
     <color name="yearText">#A89B2B</color>
+    <color name="gridView">#C8B5EC</color>
 </resources>
