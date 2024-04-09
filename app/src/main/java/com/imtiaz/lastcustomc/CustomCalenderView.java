@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -181,6 +182,13 @@ public class CustomCalenderView extends LinearLayout {
                 alertDialog = builder.create();
                 alertDialog.show();
 
+                alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialogInterface) {
+                        setUpCalender(); // update the event
+                    }
+                });
+
                 // Get reference to the close button
                 ImageButton closeButton = showView.findViewById(R.id.closeButton);
                 // Set OnClickListener to dismiss the AlertDialog
@@ -188,6 +196,7 @@ public class CustomCalenderView extends LinearLayout {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
+                        setUpCalender();
                     }
                 });
 
