@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/eventsRV"
+        android:id="@+id/eventsRv"
         android:layout_margin="5dp"
         />
 

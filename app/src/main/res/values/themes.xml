@@ -9,12 +9,12 @@
         <item name="android:textColor">@color/green</item>
         <item name="colorAccent">@color/black</item>-->
 
-        <style name="MyTimePickerDialogStyle" parent="ThemeOverlay.Material3.MaterialTimePicker">
+        <!--<style name="MyTimePickerDialogStyle" parent="ThemeOverlay.Material3.MaterialTimePicker">
             <item name="android:buttonBarNegativeButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
             <item name="android:buttonBarPositiveButtonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
             <item name="android:textColor">@color/green</item>
-            <item name="colorAccent">@color/green</item>-->
-        </style>
+            <item name="colorAccent">@color/green</item>&ndash;&gt;
+        </style>-->
 
     <!--</style>-->
 

@@ -21,6 +21,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.imtiaz.lastcustomc.db.DBOpenHelper;
 import com.imtiaz.lastcustomc.db.DBStructure;
@@ -103,7 +106,7 @@ public class CustomCalenderView extends LinearLayout {
                         int minutes = calendar.get(Calendar.MINUTE);
                         TimePickerDialog timePickerDialog = new TimePickerDialog(
                                 addView.getContext(),
-                                R.style.MyTimePickerDialogStyle, // Use your custom style here
+                               /* R.style.MyTimePickerDialogStyle,*/ // Use your custom style here
                                 new TimePickerDialog.OnTimeSetListener() {
                                     @Override
                                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
@@ -145,6 +148,59 @@ public class CustomCalenderView extends LinearLayout {
                 alertDialog.show();
             }
         });
+
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String date = eventDateFormat.format(dates.get(position));
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+
+                View showView = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_events_layout, null);
+                RecyclerView recyclerView = showView.findViewById(R.id.eventsRv);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(showView.getContext());
+                recyclerView .setLayoutManager(layoutManager);
+                recyclerView.setHasFixedSize(true);
+                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(showView.getContext(),collectionEventByDates(date));
+
+                recyclerView.setAdapter(eventRecyclerAdapter);
+                eventRecyclerAdapter.notifyDataSetChanged();
+
+                builder.setView(showView);
+                alertDialog = builder.create();
+                alertDialog.show();
+
+                return true;
+            }
+        });
+
+
+    }
+
+    private ArrayList<Events> collectionEventByDates (String dateParam){
+        ArrayList<Events> arrayList = new ArrayList<>();
+        dbOpenHelper = new DBOpenHelper(context);
+        SQLiteDatabase database = dbOpenHelper.getReadableDatabase();
+        Cursor cursor = dbOpenHelper.ReadEvents(dateParam,database);
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                String events = cursor.getString(cursor.getColumnIndexOrThrow(DBStructure.EVENT));
+                String times = cursor.getString(cursor.getColumnIndexOrThrow(DBStructure.TIME));
+                String dates = cursor.getString(cursor.getColumnIndexOrThrow(DBStructure.DATE));
+                String monthss = cursor.getString(cursor.getColumnIndexOrThrow(DBStructure.MONTH));
+                String yearss = cursor.getString(cursor.getColumnIndexOrThrow(DBStructure.YEAR));
+
+                Events eventss = new Events(events, times, dates, monthss, yearss);
+                arrayList.add(eventss);
+            }
+        }else{
+
+        }
+        cursor.close();
+        dbOpenHelper.close();
+
+
+        return arrayList;
     }
 
     private void saveEvent(String eventName, String eventTime, String date, String month, String year) {
