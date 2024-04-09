@@ -97,6 +97,7 @@ public class CustomCalenderView extends LinearLayout {
                 TextView eventTime = addView.findViewById(R.id.eventTime);
                 ImageButton setTime = addView.findViewById(R.id.setEventTime);
                 Button addEvent = addView.findViewById(R.id.addEvent);
+                ImageButton closeButton = addView.findViewById(R.id.closeButton);
 
                 setTime.setOnClickListener(new OnClickListener() {
                     @Override
@@ -143,6 +144,15 @@ public class CustomCalenderView extends LinearLayout {
                     }
                 });
 
+                // Set OnClickListener for the closeButton
+                closeButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Dismiss the AlertDialog when closeButton is clicked
+                        alertDialog.dismiss();
+                    }
+                });
+
                 builder.setView(addView);
                 alertDialog = builder.create();
                 alertDialog.show();
@@ -161,7 +171,8 @@ public class CustomCalenderView extends LinearLayout {
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(showView.getContext());
                 recyclerView .setLayoutManager(layoutManager);
                 recyclerView.setHasFixedSize(true);
-                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(showView.getContext(),collectionEventByDates(date));
+                EventRecyclerAdapter eventRecyclerAdapter = new EventRecyclerAdapter(showView.getContext(), collectionEventByDates(date));
+
 
                 recyclerView.setAdapter(eventRecyclerAdapter);
                 eventRecyclerAdapter.notifyDataSetChanged();
@@ -169,6 +180,16 @@ public class CustomCalenderView extends LinearLayout {
                 builder.setView(showView);
                 alertDialog = builder.create();
                 alertDialog.show();
+
+                // Get reference to the close button
+                ImageButton closeButton = showView.findViewById(R.id.closeButton);
+                // Set OnClickListener to dismiss the AlertDialog
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
 
                 return true;
             }
