@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,7 @@ public class CustomCalenderView extends LinearLayout {
             public void onClick(View view) {
                 calendar.add(Calendar.MONTH,-1);
                 setUpCalender();
+
             }
         });
 
@@ -68,6 +70,7 @@ public class CustomCalenderView extends LinearLayout {
             public void onClick(View view) {
                 calendar.add(Calendar.MONTH,1);
                 setUpCalender();
+
             }
         });
 
@@ -136,19 +139,25 @@ public class CustomCalenderView extends LinearLayout {
     }
 
     private void InitializeLayout(){
-        LayoutInflater inflater =  (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.calendar_layout,this);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.calendar_layout, this);
         nextBtn = view.findViewById(R.id.nextBtn);
         prevBtn = view.findViewById(R.id.previousBtn);
         currentDateTxt = view.findViewById(R.id.currentDate);
         gridView = view.findViewById(R.id.gridView);
 
+        // Initialize the adapter
+        myGridAdapter = new MyGridAdapter(context, dates, calendar, eventsList);
+
         // Set up the calendar with current month's dates
         setUpCalender();
 
+        // Set the adapter to the grid view
+        gridView.setAdapter(myGridAdapter);
+
     }
 
-    private void setUpCalender(){
+    private void setUpCalender() {
         String currentDate = dateFormat.format(calendar.getTime());
         currentDateTxt.setText(currentDate);
         dates.clear();

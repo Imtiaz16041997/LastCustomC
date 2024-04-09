@@ -31,7 +31,6 @@ public class MyGridAdapter extends ArrayAdapter {
     }
 
     @NonNull
-
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Date monthDate = dates.get(position);
@@ -40,7 +39,6 @@ public class MyGridAdapter extends ArrayAdapter {
         int dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
         int displayMonth = dateCalendar.get(Calendar.MONTH) + 1;
         int displayYear = dateCalendar.get(Calendar.YEAR);
-        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
         int currentMonth = currentDate.get(Calendar.MONTH) + 1;
         int currentYear = currentDate.get(Calendar.YEAR);
 
@@ -52,17 +50,21 @@ public class MyGridAdapter extends ArrayAdapter {
         TextView dayNumber = view.findViewById(R.id.calenderDay);
         dayNumber.setText(String.valueOf(dayNo));
 
-        // Set background color
-        if (displayMonth == currentMonth && displayYear == currentYear && dayNo == currentDay) {
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.friday)); // Set your desired color for the current date
+        // Check if the date is the current date and set the background color accordingly
+
+        Calendar currentCalendar = Calendar.getInstance();
+        if (dateCalendar.get(Calendar.DAY_OF_YEAR) == currentCalendar.get(Calendar.DAY_OF_YEAR)
+                && dateCalendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.friday));
         } else if (displayMonth == currentMonth && displayYear == currentYear) {
-            view.setBackgroundColor(getContext().getResources().getColor(R.color.green)); // Set your desired color for the current month
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
         } else {
-            view.setBackgroundColor(Color.parseColor("#ffffff")); // Set your desired color for other dates
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
         }
 
         return view;
     }
+
 
     @Override
     public int getCount() {
