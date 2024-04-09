@@ -101,19 +101,26 @@ public class CustomCalenderView extends LinearLayout {
                         Calendar calendar = Calendar.getInstance();
                         int hours = calendar.get(Calendar.HOUR_OF_DAY);
                         int minutes = calendar.get(Calendar.MINUTE);
-                        TimePickerDialog timePickerDialog = new TimePickerDialog(addView.getContext(), androidx.appcompat.R.style.Theme_AppCompat_Dialog, new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                                Calendar c = Calendar.getInstance();
-                                c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                                c.set(Calendar.MINUTE, minute);
-                                c.setTimeZone(TimeZone.getDefault());
-                                SimpleDateFormat hFormate = new SimpleDateFormat("K:mm a", Locale.ENGLISH);
-                                event_Time = hFormate.format(c.getTime());
-                                eventTime.setText(event_Time);
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                                addView.getContext(),
+                                R.style.MyTimePickerDialogStyle, // Use your custom style here
+                                new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                                        Calendar c = Calendar.getInstance();
+                                        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                        c.set(Calendar.MINUTE, minute);
+                                        c.setTimeZone(TimeZone.getDefault());
+                                        SimpleDateFormat hFormate = new SimpleDateFormat("K:mm a", Locale.ENGLISH);
+                                        event_Time = hFormate.format(c.getTime());
+                                        eventTime.setText(event_Time);
+                                    }
+                                },
+                                hours,
+                                minutes,
+                                false
+                        );
 
-                            }
-                        }, hours, minutes, false);
                         timePickerDialog.show();
                     }
                 });
