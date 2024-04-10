@@ -31,31 +31,35 @@ public class MyGridAdapter extends ArrayAdapter {
     }
 
     @NonNull
+
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-       Date monthDate = dates.get(position);
-       Calendar dateCalendar = Calendar.getInstance();
-       dateCalendar.setTime(monthDate);
-       int dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
-       int displayMonth = dateCalendar.get(Calendar.MONTH)+1;
-       int displayYear = dateCalendar.get(Calendar.YEAR);
-       int currentMonth = currentDate.get(Calendar.MONTH)+1;
-       int currentYear = currentDate.get(Calendar.YEAR);
+        Date monthDate = dates.get(position);
+        Calendar dateCalendar = Calendar.getInstance();
+        dateCalendar.setTime(monthDate);
+        int dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH);
+        int displayMonth = dateCalendar.get(Calendar.MONTH) + 1;
+        int displayYear = dateCalendar.get(Calendar.YEAR);
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
+        int currentMonth = currentDate.get(Calendar.MONTH) + 1;
+        int currentYear = currentDate.get(Calendar.YEAR);
 
-       View view = convertView;
-       if(view == null){
-           view = inflater.inflate(R.layout.single_cell_layout,parent,false);
-
-       }if(displayMonth == currentMonth && displayYear == currentYear){
-           view.setBackgroundColor(getContext().getResources().getColor(R.color.green)); // background color of current Month date field
-        }else{
-           view.setBackgroundColor(Color.parseColor("#ffffff")); // background color of date field
+        View view = convertView;
+        if (view == null) {
+            view = inflater.inflate(R.layout.single_cell_layout, parent, false);
         }
 
         TextView dayNumber = view.findViewById(R.id.calenderDay);
-
         dayNumber.setText(String.valueOf(dayNo));
-//        dayNumber.setTextColor(getContext().getResources().getColor(R.color.black));
+
+        // Set background color
+        if (displayMonth == currentMonth && displayYear == currentYear && dayNo == currentDay) {
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.friday)); // Set your desired color for the current date
+        } else if (displayMonth == currentMonth && displayYear == currentYear) {
+            view.setBackgroundColor(getContext().getResources().getColor(R.color.green)); // Set your desired color for the current month
+        } else {
+            view.setBackgroundColor(Color.parseColor("#ffffff")); // Set your desired color for other dates
+        }
 
         return view;
     }

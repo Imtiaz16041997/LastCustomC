@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -126,6 +127,7 @@ public class CustomCalenderView extends LinearLayout {
 
     private void saveEvent(String eventName, String eventTime, String date, String month, String year) {
 
+        Toast.makeText(context, "Event Saved", Toast.LENGTH_SHORT).show();
     }
 
     public CustomCalenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
